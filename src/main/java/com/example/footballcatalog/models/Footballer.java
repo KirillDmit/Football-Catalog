@@ -35,9 +35,15 @@ public class Footballer {
     @Column(name = "birthdate")
     private Date birthdate;
 
+    @NotBlank(message = "Команда не должна быть пустой")
     @Column(name = "team")
     private String team;
 
     @Column(name = "country")
     private String country;
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s %s %s %s", name, surname, gender, birthdate, team, country);
+    }
 }
