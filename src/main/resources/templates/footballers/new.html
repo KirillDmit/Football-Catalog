@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New footballer</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/footballers}" th:object="${footballer}">
+    <label for="name">Имя: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <br/>
+    <label for="surname">Фамилия: </label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+    <br/>
+    <label for="gender">Пол: </label>
+    <input type="text" th:field="*{gender}" id="gender"/>
+    <div style="color:red" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Gender Error</div>
+    <br/>
+    <label for="birthdate">Дата рождения: </label>
+    <input type="text" th:field="*{birthdate}" id="birthdate"/>
+    <div style="color:red" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}">Birthdate Error</div>
+    <br/>
+    <label for="team">Команда: </label>
+    <select th:object="${footballer}" th:field="*{team}">
+        <option th:each="team : ${teams}" th:value="${team}" th:text="${team}">
+        </option>
+    </select>
+    <br/>
+    <input type="text" th:field="*{team}" id="team"/>
+    <div style="color:red" th:if="${#fields.hasErrors('team')}" th:errors="*{team}">Team Error</div>
+    <br/>
+    <label for="country">Страна: </label>
+    <select th:object="${footballer}" th:field="*{country}" id="country">
+        <option th:each="country : ${countries}" th:value="${country}" th:text="${country.name()}">
+        </option>
+    </select>
+    <div style="color:red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">Country Error</div>
+
+    <br/>
+    <input type="submit" value="Создать!"/>
+</form>
+<br/>
+<br/>
+<a href="/footballers">Список футболистов</a>
+</body>
+</html>
